@@ -30,12 +30,12 @@ def ajouter_modifier_contact():
     nom = input("\nEntrez le nom du contact à ajouter ou à modifier : ")
     numero = input("Entrez le numéro de téléphone du contact : ")
     
-    with open(SAVE_FILE, "r") as f:
+    with open(SAVE_FILE, "r", encoding='utf-8') as f:
         data = load(f)
 
     data[nom] = numero
 
-    with open(SAVE_FILE, "w") as f:
+    with open(SAVE_FILE, "w", encoding='utf-8') as f:
         dump(data, f)
     return f"\nContact {nom} ajouté avec le numéro {numero}."
 
@@ -43,12 +43,12 @@ def ajouter_modifier_contact():
 
 def supprimer_contact(nom):
 
-    with open(SAVE_FILE, "r") as f:
+    with open(SAVE_FILE, "r", encoding='utf-8') as f:
         data = load(f)
     
     if nom == "*":
         data.clear()
-        with open(SAVE_FILE, "w") as f:
+        with open(SAVE_FILE, "w", encoding='utf-8') as f:
             dump(data, f)
         return "\nTous les contacts ont été supprimés."
 
@@ -56,7 +56,7 @@ def supprimer_contact(nom):
 
         del data[nom]
 
-        with open(SAVE_FILE, "w") as f:
+        with open(SAVE_FILE, "w", encoding='utf-8') as f:
             dump(data, f)
 
         return f"\nLe contact {nom} a été supprimé."
@@ -66,7 +66,7 @@ def supprimer_contact(nom):
 
 
 def afficher_contacts(nom):
-    with open(SAVE_FILE, "r", encoding="utf-8") as f:
+    with open(SAVE_FILE, "r", encoding='utf-8') as f:
         data = load(f)
     if nom == "*":
         print("\nAffichage de tout les contacts :")
