@@ -2,7 +2,7 @@ from json import load, dump
 from time import sleep
 
 # Fichier de sauvegarde
-SAVE_FILE = "Sauvegarde_contact.json"
+SAVE_FILE = "Liste de contact - Sauvegarde.json"
 
 def fonct_choix():
     choix = 0
@@ -14,7 +14,7 @@ Que voulez-vous faire ?
                       
     2. Supprimer un contact
                       
-    3. Afficher les contacts
+    3. Afficher un contacts
                       
     4. Quitter
 
@@ -37,7 +37,7 @@ def ajouter_modifier_contact():
 
     with open(SAVE_FILE, "w") as f:
         dump(data, f)
-    return f"Contact {nom} ajouté avec le numéro {numero}."
+    return f"\nContact {nom} ajouté avec le numéro {numero}."
 
 
 
@@ -45,27 +45,38 @@ def supprimer_contact(nom):
 
     with open(SAVE_FILE, "r") as f:
         data = load(f)
+    
+    if nom == "*":
+        data.clear()
+        with open(SAVE_FILE, "w") as f:
+            dump(data, f)
+        return "\nTous les contacts ont été supprimés."
 
     if nom in data:
+
         del data[nom]
 
         with open(SAVE_FILE, "w") as f:
             dump(data, f)
 
-        return f"Le contact {nom} a été supprimé."
+        return f"\nLe contact {nom} a été supprimé."
     else:
-        return f"Le contact {nom} n'existe pas."
+        return f"\nLe contact {nom} n'existe pas."
 
 
 
 def afficher_contacts(nom):
     with open(SAVE_FILE, "r", encoding="utf-8") as f:
         data = load(f)
-
+    if nom == "*":
+        print("\nAffichage de tout les contacts :")
+        for i in data:
+            print(f"\n  {i} : {data[i]}")
+        return ""
     if nom in data:
-        return f"Le numéro de {nom} est {data[nom]}."
+        return f"\nLe numéro de {nom} est {data[nom]}."
     else:
-        return f"Le contact {nom} n'existe pas."
+        return f"\nLe contact {nom} n'existe pas."
 
 
 choix = 1
