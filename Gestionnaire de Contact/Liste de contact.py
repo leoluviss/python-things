@@ -2,7 +2,7 @@ from json import load, dump
 from time import sleep
 
 # Fichier de sauvegarde
-SAVE_FILE = "Liste de contact - Sauvegarde.json"
+SAVE_FILE = "Gestionnaire de Contact\Liste de contact - Sauvegarde.json"
 
 def fonct_choix():
     choix = 0
